@@ -1,11 +1,24 @@
 Open Infinity Core - a solution accelerator framework.
 
 v.1.1.1.RELEASE - Upgrades to Maven dependencies
-- Spring Framework support level upgraded to 3.1.4
-- Spring Security support level upgraded to 3.1.4
-- JBehave support level upgraded to 3.6.2
-- JBehave Web support level upgraded to 3.5.2
+
 * Spring Batch Core support level to 2.1.8
+- Spring Framework support level upgraded to 3.1.4.RELEASE
+- Spring Security support level upgraded to 3.1.4.RELEASE
+- SLF4J support level upgraded to 1.7.5
+- JBehave support level upgraded to 3.8
+- JBehave Web support level upgraded to 3.5.5
+- Junit support level upgraded to 4.8.2
+- Mockito support level upgraded to 1.9.5
+- Hsqldb support level upgraded to 2.2.9
+- Jackson support level upgraded to 1.9.12
+- Hibernate validator support level upgraded to 4.2.0.Final
+- Validation API version support level upgraded to 1.1.0.Final
+- Joda time support level upgraded to 2.2
+- Lombok support level upgraded to 0.11.8
+- Jolokia support level upgraded to 1.1.1
+- EHCache support level upgraded to 2.6.6
+- Commons-lang support level upgraded to 2.6
 
 Packaging instructions.
 

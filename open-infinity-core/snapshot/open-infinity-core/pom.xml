@@ -9,7 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-		<slf4j.version>1.6.4</slf4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
 		<spring.maven.artifact.version>3.1.4.RELEASE</spring.maven.artifact.version>
 		<spring.security.version>3.1.4.RELEASE</spring.security.version>
 		<spring.batch.core.version>2.1.8.RELEASE</spring.batch.core.version>
@@ -20,12 +20,13 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<hsqldb.version>2.2.9</hsqldb.version>
 		<jackson.version>1.9.12</jackson.version>
-		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
+		<hibernate.validator.version>4.2.0.Final</hibernate.validator.version>
 		<validation.api.version>1.1.0.Final</validation.api.version>
 		<joda.time.version>2.2</joda.time.version>
 		<lombok.version>0.11.8</lombok.version>
 		<jolokia.version>1.1.1</jolokia.version>
 		<ehcache.core.version>2.6.6</ehcache.core.version>
+		<commons.lang.version>2.6</commons.lang.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -136,7 +137,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.5</version>
+			<version>${commons.lang.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -253,18 +254,6 @@
 			<resource>
 				<directory>src/test/resources</directory>
 			</resource>
-			<!-- <resource> -->
-			<!-- <directory>.</directory> -->
-			<!-- <includes> -->
-			<!-- <include>src/main/resources/META-INF/*</include> -->
-			<!-- </includes> -->
-			<!-- </resource> -->
-			<!-- <resource> -->
-			<!-- <directory>.</directory> -->
-			<!-- <includes> -->
-			<!-- <include>src/test/resources/META-INF/*</include> -->
-			<!-- </includes> -->
-			<!-- </resource> -->
 			<resource>
 				<directory>src/main/java</directory>
 			</resource>
