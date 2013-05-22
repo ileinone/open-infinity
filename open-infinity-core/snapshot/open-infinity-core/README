@@ -1,5 +1,32 @@
 Open Infinity Core - a solution accelerator framework.
 
+v.1.1.1.RELEASE - Upgrades to Maven dependencies
+- Spring Framework support level upgraded to 3.1.4
+- Spring Security support level upgraded to 3.1.4
+- JBehave support level upgraded to 3.6.2
+- JBehave Web support level upgraded to 3.5.2
+* Spring Batch Core support level to 2.1.8
+
+Packaging instructions.
+
+Download configuration management tool (Maven 3) and install it (notice that Java Runtime 1.6 is needed):
+http://maven.apache.org/download.html
+
+Install lombok
+mkdir <lombok-directory>
+cd <lombok-directory>
+git clone https://github.com/awhitford/lombok.maven
+cd lombok.maven
+Use maven for compiling, testing, packaging lombok -plugin to local Maven repository with command:
+mvn clean install
+
+Install Open Infinity Core:
+mkdir <open-infinity-core>
+git clone https://github.com/ileinone/open-infinity
+cd <open-infinity-core>/releases/openinfinity-core/1.1.1
+Use maven for compiling, testing, packaging and installing Open Infinity Core -component to local Maven repository with command:
+mvn clean lombok:delombok install
+
 v.1.1.0.RELEASE - Upgrades to Maven dependencies
 - Spring Framework support level upgraded to 3.1.1
 - Spring Security support level upgraded to 3.1.0

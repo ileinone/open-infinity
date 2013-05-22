@@ -3,15 +3,29 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfinity</groupId>
 	<artifactId>open-infinity-core</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>SNAPSHOT</version>
 	<name>Open Infinity Core Latest snapshot</name>
 	<description>Core Asset Base for Open Infinity based software projects.</description>
 	<properties>
-		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
-		<slf4j.version>1.6.4</slf4j.version>
-		<spring.maven.artifact.version>3.1.1.RELEASE</spring.maven.artifact.version>
-		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+		<slf4j.version>1.6.4</slf4j.version>
+		<spring.maven.artifact.version>3.1.4.RELEASE</spring.maven.artifact.version>
+		<spring.security.version>3.1.4.RELEASE</spring.security.version>
+		<spring.batch.core.version>2.1.8.RELEASE</spring.batch.core.version>
+		<jbehave.version>3.8</jbehave.version>
+		<jbehave.web.selenium.version>3.5.5</jbehave.web.selenium.version>
+		<junit.version>4.8.2</junit.version>
+		<mockito.version>1.9.5</mockito.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<hsqldb.version>2.2.9</hsqldb.version>
+		<jackson.version>1.9.12</jackson.version>
+		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
+		<validation.api.version>1.1.0.Final</validation.api.version>
+		<joda.time.version>2.2</joda.time.version>
+		<lombok.version>0.11.8</lombok.version>
+		<jolokia.version>1.1.1</jolokia.version>
+		<ehcache.core.version>2.6.6</ehcache.core.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +60,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.maven.artifact.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring.maven.artifact.version}</version>
 		</dependency>
@@ -63,6 +82,11 @@
 					<artifactId>spring-context-support</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>${spring.batch.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -117,18 +141,18 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
-			<version>2.1.0</version>
+			<version>${ehcache.core.version}</version>
 		</dependency>
 		<!-- Monitoring API -->
 		<dependency>
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-client-java</artifactId>
-			<version>0.91</version>
+			<version>${jolokia.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jolokia</groupId>
 			<artifactId>jolokia-core</artifactId>
-			<version>0.91</version>
+			<version>${jolokia.version}</version>
 		</dependency>
 		<!-- Audit trail xpath queries -->
 		<dependency>
@@ -140,41 +164,41 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>0.10.8</version>
+			<version>${lombok.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.0</version>
+			<version>${joda.time.version}</version>
 		</dependency>
 		<!-- JSR-303 standard Java Bean Validation annotations -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
+			<version>${validation.api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<version>${hibernate.validator.version}</version>
 		</dependency>
 		<!-- JSON libraries -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.5</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.5</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<!-- test scoped dependencies -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb-j5</artifactId>
-			<version>2.2.4</version>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -186,31 +210,31 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-maven-plugin</artifactId>
-			<version>3.6.2</version>
+			<version>${jbehave.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jbehave</groupId>
 			<artifactId>jbehave-spring</artifactId>
-			<version>3.6.2</version>
+			<version>${jbehave.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jbehave.web</groupId>
 			<artifactId>jbehave-web-selenium</artifactId>
-			<version>3.5.2</version>
+			<version>${jbehave.web.selenium.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.0</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -227,22 +251,25 @@
 				<directory>src/main/resources</directory>
 			</resource>
 			<resource>
-				<directory>.</directory>
-				<includes>
-					<!--<include>plugin.xml</include> -->
-					<include>META-INF/*</include>
-				</includes>
+				<directory>src/test/resources</directory>
 			</resource>
+			<!-- <resource> -->
+			<!-- <directory>.</directory> -->
+			<!-- <includes> -->
+			<!-- <include>src/main/resources/META-INF/*</include> -->
+			<!-- </includes> -->
+			<!-- </resource> -->
+			<!-- <resource> -->
+			<!-- <directory>.</directory> -->
+			<!-- <includes> -->
+			<!-- <include>src/test/resources/META-INF/*</include> -->
+			<!-- </includes> -->
+			<!-- </resource> -->
 			<resource>
 				<directory>src/main/java</directory>
-				<filtering>true</filtering>
 			</resource>
 			<resource>
 				<directory>src/test/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-					<include>**/*.dtd</include>
-				</includes>
 			</resource>
 		</resources>
 		<plugins>
@@ -372,7 +399,7 @@
 			<plugin>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
-				<version>0.10.8.0</version>
+				<version>${lombok.version}.0</version>
 				<executions>
 					<execution>
 						<phase>generate-test-sources</phase>
@@ -390,20 +417,17 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>maven-repo</id>
-			<name>maven 
-		repo</name>
+			<name>maven repo</name>
 			<url>http://repo1.maven.org/maven2/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>spring-maven-milestone</id>
-			<name>Springframework 
-			Maven Repository</name>
+			<name>Springframework Maven Repository</name>
 			<url>http://repo1.maven.org/maven2/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>labs-consol-release</id>
-			<name>ConSol* Labs Repository 
-		(Releases)</name>
+			<name>ConSol* Labs Repository (Releases)</name>
 			<url>http://labs.consol.de/maven/repository</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -426,9 +450,9 @@
 	</pluginRepositories>
 	<repositories>
 		<repository>
-			<id>springsource-repo</id>
-			<name>SpringSource Repository</name>
-			<url>http://repo.springsource.org/release</url>
+			<id>spring-releases</id>
+			<name>Spring Maven RELEASE Repository</name>
+			<url>http://maven.springframework.org</url>
 		</repository>
 		<repository>
 			<id>labs-consol-release</id>
@@ -441,17 +465,17 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-		<repository>
-			<id>labs-consol-snapshot</id>
-			<name>ConSol* Labs Repository (Snapshots)</name>
-			<url>http://labs.consol.de/maven/snapshots-repository</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
+		<!-- <repository> -->
+		<!-- <id>labs-consol-snapshot</id> -->
+		<!-- <name>ConSol* Labs Repository (Snapshots)</name> -->
+		<!-- <url>http://labs.consol.de/maven/snapshots-repository</url> -->
+		<!-- <snapshots> -->
+		<!-- <enabled>true</enabled> -->
+		<!-- </snapshots> -->
+		<!-- <releases> -->
+		<!-- <enabled>false</enabled> -->
+		<!-- </releases> -->
+		<!-- </repository> -->
 		<repository>
 			<id>raven-repository</id>
 			<name>Maven Repository</name>
@@ -462,20 +486,6 @@
 			<releases>
 				<enabled>false</enabled>
 			</releases>
-		</repository>
-		<repository>
-			<id>jboss</id>
-			<url>http://repository.jboss.org/maven2</url>
-		</repository>
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
 		</repository>
 		<repository>
 			<id>Maven Central</id>
@@ -518,7 +528,7 @@
 					<plugin>
 						<groupId>org.projectlombok</groupId>
 						<artifactId>lombok-maven-plugin</artifactId>
-						<version>0.10.8.0</version>
+						<version>${lombok.version}.0</version>
 						<dependencies>
 							<dependency>
 								<groupId>sun.jdk</groupId>
