@@ -1,8 +1,11 @@
 Open Infinity Core - a solution accelerator framework.
 
-v.1.1.1.RELEASE - Upgrades to Maven dependencies
+v.1.2.0.RELEASE - Upgrades to Maven dependencies
 
-* Spring Batch Core support level to 2.1.8
++ HDIV Web Security library support level to 2.1.4
++ Spring Batch Core support level to 2.2.0.RELEASE
++ Spring Aspects support level to 3.1.4.RELEASE
++ Spring JMS support level to 3.1.4.RELEASE
 - Spring Framework support level upgraded to 3.1.4.RELEASE
 - Spring Security support level upgraded to 3.1.4.RELEASE
 - SLF4J support level upgraded to 1.7.5
@@ -19,6 +22,10 @@ v.1.1.1.RELEASE - Upgrades to Maven dependencies
 - Jolokia support level upgraded to 1.1.1
 - EHCache support level upgraded to 2.6.6
 - Commons-lang support level upgraded to 2.6
+
+Features
+
++ Collection element util for managing callbacks with Collections and Maps.
 
 Packaging instructions.
 

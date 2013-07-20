@@ -102,7 +102,7 @@ public class AuditTrailInterceptorIntegrationTest extends AbstractJUnit4SpringCo
 	}
 	
 	public String readLogFileContent(File file) throws Throwable {
-		return FileUtils.readFileToString(file);
+		return FileUtils.readFileToString(file, "UTF-8");
 	}
 	
 	@After

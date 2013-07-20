@@ -133,7 +133,7 @@ public class LogInterceptorIntegrationTest extends AbstractJUnit4SpringContextTe
 	}
 
 	public String readLogFileContent(File file) throws Throwable {
-		return FileUtils.readFileToString(file);	
+		return FileUtils.readFileToString(file, "UTF-8");	
 	}
 
 	@After

@@ -12,7 +12,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.maven.artifact.version>3.1.4.RELEASE</spring.maven.artifact.version>
 		<spring.security.version>3.1.4.RELEASE</spring.security.version>
-		<spring.batch.core.version>2.1.8.RELEASE</spring.batch.core.version>
+		<spring.batch.core.version>2.2.0.RELEASE</spring.batch.core.version>
 		<jbehave.version>3.8</jbehave.version>
 		<jbehave.web.selenium.version>3.5.5</jbehave.web.selenium.version>
 		<junit.version>4.8.2</junit.version>
@@ -27,6 +27,7 @@
 		<jolokia.version>1.1.1</jolokia.version>
 		<ehcache.core.version>2.6.6</ehcache.core.version>
 		<commons.lang.version>2.6</commons.lang.version>
+		<hdiv.version>2.1.4</hdiv.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -204,6 +205,41 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-xc</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		<!-- Web security libraries -->
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-core</artifactId>
+			<version>${hdiv.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-config</artifactId>
+			<version>${hdiv.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-spring-mvc</artifactId>
+			<version>${hdiv.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aspects</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hdiv</groupId>
+			<artifactId>hdiv-jstl-taglibs-1.2</artifactId>
+			<version>${hdiv.version}</version>
 		</dependency>
 		<!-- test scoped dependencies -->
 		<dependency>
