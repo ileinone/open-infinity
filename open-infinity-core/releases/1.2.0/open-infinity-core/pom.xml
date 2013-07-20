@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openinfinity</groupId>
 	<artifactId>open-infinity-core</artifactId>
-	<version>SNAPSHOT</version>
-	<name>Open Infinity Core Latest snapshot</name>
+	<version>1.2.0.RELEASE</version>
+	<name>Open Infinity Core 1.2.0.RELEASE</name>
 	<description>Core Asset Base for Open Infinity based software projects.</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

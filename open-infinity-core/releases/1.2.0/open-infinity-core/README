@@ -43,7 +43,7 @@ mvn clean install
 Install Open Infinity Core:
 mkdir <open-infinity-core>
 git clone https://github.com/ileinone/open-infinity
-cd <open-infinity-core>/releases/openinfinity-core/1.1.1
+cd <open-infinity-core>/releases/openinfinity-core/1.2.0
 Use maven for compiling, testing, packaging and installing Open Infinity Core -component to local Maven repository with command:
 mvn clean lombok:delombok install
 
@@ -55,8 +55,8 @@ v.1.1.0.RELEASE - Upgrades to Maven dependencies
 
 Features
 - AuditTrailAspect upgrade to version 1.1.0 (Spring Security upgrade)
-- LogAspect upgrade to version 1.1.0 (implements argument strategy based on audit trail)
-- Log annotation upgrade to version 1.1.0 (implements argument strategy based on audit trail)
+- LogAspect upgrade to version 1.1.0 (implements argument strategy based on @AuditTrail metadata)
+- Log annotation upgrade to version 1.1.0 (implements argument strategy based on @Log metadata)
 
 Packaging instructions.
 
