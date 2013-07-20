@@ -23,7 +23,7 @@ import java.util.Map;
  * 
  * @author Ilkka Leinonen
  * @version 1.0.0
- * @since 1.3.0
+ * @since 1.2.0
  */
 public class CollectionElementUtil {
 

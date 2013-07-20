@@ -20,7 +20,7 @@ package org.openinfinity.core.util;
  * 
  * @author Ilkka Leinonen
  * @version 1.0.0
- * @since 1.3.0
+ * @since 1.2.0
  */
 public interface CollectionElementCallback<CallbackObject> {
 	
