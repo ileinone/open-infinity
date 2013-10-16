@@ -17,13 +17,12 @@ package org.openinfinity.core.validation;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openinfinity.core.common.IntegrationTest;
+import org.openinfinity.core.common.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit38.AbstractJUnit38SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import org.openinfinity.core.common.IntegrationTest;
-import org.openinfinity.core.common.domain.Account;
 
 /**
  * Integration test for validator.

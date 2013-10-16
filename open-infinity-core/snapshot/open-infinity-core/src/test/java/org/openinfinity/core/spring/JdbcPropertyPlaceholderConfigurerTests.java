@@ -17,13 +17,11 @@ package org.openinfinity.core.spring;
 
 import static org.junit.Assert.assertEquals;
 
-
 import java.util.Properties;
 
 import javax.sql.DataSource;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 

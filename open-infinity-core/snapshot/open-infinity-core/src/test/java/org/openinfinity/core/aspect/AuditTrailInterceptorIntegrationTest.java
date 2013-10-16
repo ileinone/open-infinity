@@ -15,10 +15,10 @@
  */
 package org.openinfinity.core.aspect;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -77,7 +77,7 @@ public class AuditTrailInterceptorIntegrationTest extends AbstractJUnit4SpringCo
 		assertEquals(true, actual.contains("Name1"));
 	}
 
-	@Test @Ignore
+	@Test
 	public void givenKnownArgumentsWhenAccessingMethodThenAllArgumentsMustNotBePassedToAuditTrail() throws Throwable {
 		Account account = new Account("2", "Name3");
 		integrationTest.auditMeWithNoArguments(account);

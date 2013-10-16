@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 the original author or authors.
+ * Copyright (c) 2011-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,14 @@ import javax.validation.Valid;
 import javax.validation.Validator;
 
 import org.openinfinity.core.annotation.AuditTrail;
+import org.openinfinity.core.annotation.Decrypt;
+import org.openinfinity.core.annotation.Encrypt;
 import org.openinfinity.core.annotation.Log;
+import org.openinfinity.core.aspect.ArgumentStrategy;
 import org.openinfinity.core.common.domain.Account;
 import org.openinfinity.core.util.ExceptionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -39,7 +44,7 @@ import org.springframework.stereotype.Service;
  * Integration test Spring bean.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
+ * @version 1.3.0
  * @since 1.0.0
  */
 @Component
@@ -47,6 +52,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class IntegrationTestBean implements IntegrationTest {
 
+	/**
+	 * Logger for this class.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(IntegrationTestBean.class);
+	
 	public static final String FALSE_FIELD = "asdfasdfasdf";
 	
 	@Autowired
@@ -118,6 +128,30 @@ public class IntegrationTestBean implements IntegrationTest {
 	public boolean validateMe(@Valid Account account) {
 		Set<ConstraintViolation<Account>> failures = validator.validate(account);
 		return failures.isEmpty() ? true : false;
+	}
+
+	@Encrypt(argumentStrategy = ArgumentStrategy.ALL)
+	public Account encryptMe(Account account) {
+		LOGGER.debug("Account: " + account.toString());
+		return account;
+	}
+
+	@Decrypt(argumentStrategy = ArgumentStrategy.ALL)
+	public Account decryptMe(Account account) {
+		LOGGER.debug("Account: " + account.toString());
+		return account;
+	}
+	
+	@Encrypt(argumentStrategy = ArgumentStrategy.CUSTOM,  value = {"name", "address"})
+	public Account encryptMeWithSpecifiedAttributes(Account account) {
+		LOGGER.debug("Account: " + account.toString());
+		return account;
+	}
+
+	@Decrypt(argumentStrategy = ArgumentStrategy.CUSTOM,  value = {"name", "address"})
+	public Account decryptMeWithSpecifiedAttributes(Account account) {
+		LOGGER.debug("Account: " + account.toString());
+		return account;
 	}
 	
 }

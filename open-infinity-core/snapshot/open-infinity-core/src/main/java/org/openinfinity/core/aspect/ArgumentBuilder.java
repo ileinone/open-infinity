@@ -15,18 +15,26 @@
  */
 package org.openinfinity.core.aspect;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.jxpath.JXPathContext;
 import org.aspectj.lang.JoinPoint;
+import org.openinfinity.core.exception.SystemException;
 import org.openinfinity.core.util.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ReflectionUtils;
+import org.springframework.util.ReflectionUtils.FieldCallback;
 
 /**
  * Builder class for argument information. Can be used with logging and audit trail.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
- * @since 1.0.0
+ * @version 1.2.0
+ * @since 1.2.0
  */
 public class ArgumentBuilder {
 	/**
@@ -43,6 +51,94 @@ public class ArgumentBuilder {
 	public ArgumentBuilder() {
 		this.builder = new StringBuilder();
 	}
+	
+	private static Map<String, Field> FIELD_CACHE;
+	
+	static {
+		FIELD_CACHE = new HashMap<String, Field>();
+	}
+
+	/**
+	 * Executes field callbacks on found and defined attribute names.
+	 * 
+	 * @param argumentGatheringCallback Represents the actual callback method.
+	 * @param arguments Represents the arguments for method.
+	 * @param allowedFields Represents the allowed argument's field names.
+	 */
+	public void executeArgumentGatheringCallbackBasedOnDefinedFields(ArgumentGatheringFieldCallback<Field, Object> argumentGatheringCallback, Object[] arguments, String[] allowedFields) {
+		for (String allowedField : allowedFields) {
+			for (Object object : arguments) {
+				try {
+					JXPathContext context = JXPathContext.newContext(object);
+					Object value = context.getValue(allowedField);
+					String argument = object == null ? "null argument" : object.getClass().getName();
+					generateKeyValueString(builder, object, value, argument);
+					Field field = getField(allowedField, object, argument);
+					if (!field.isAccessible()) {
+						field.setAccessible(true);
+					}
+					argumentGatheringCallback.onField(field, object);
+				} catch(Throwable throwable) {
+					LOGGER.warn(ExceptionUtil.getStackTraceString(throwable));
+				}
+			}
+		}
+	}
+
+	/**
+	 * Executes field callbacks on all attribute names.
+	 * 
+	 * @param argumentGatheringCallback Represents the actual callback method.
+	 * @param arguments Represents the arguments for method.
+	 */
+	public void executeArgumentGatheringCallbackOnAllFields(ArgumentGatheringFieldCallback<Field, Object> argumentGatheringCallback, Object[] arguments) {
+		doRecursiveFieldLookUpAndCallFieldCallback(argumentGatheringCallback, arguments);
+	}
+	
+	private void doRecursiveFieldLookUpAndCallFieldCallback(final ArgumentGatheringFieldCallback<Field, Object> argumentGatheringCallback, final Object[] objects) {
+		for (final Object object : objects) {
+			try {
+				if (object != null) {
+					ReflectionUtils.doWithFields(object.getClass(), new FieldCallback() {
+						public void doWith(Field field) {
+							try {
+								if (!field.isAccessible()) {
+									field.setAccessible(Boolean.TRUE);
+								}
+								if (!(Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers()))) {
+									argumentGatheringCallback.onField(field, object);						
+									LOGGER.debug("Accessing field: " + field.getName());
+								}
+							} catch (Throwable e) {
+								LOGGER.error("Failure occurred while accessing object field.", e);
+							} 
+						} 
+					});
+				}
+			} catch (Throwable throwable) {
+				throw new SystemException(throwable);
+			}
+		}
+	}
+	
+	private void generateKeyValueString(StringBuilder builder, Object object, Object value, String argument) {
+		builder
+		.append(object==null ? "null argument" : argument)
+		.append("=[")
+		.append((value==null ? "null value" : (value)))
+		.append("] ");
+	}
+	
+	private Field getField(String allowedField, Object object, String argument) {
+		Field field;
+		LOGGER.debug(object.getClass().getName() + "." + allowedField);
+		field = ReflectionUtils.findField(object.getClass(), allowedField);
+		LOGGER.debug("field name: " + field.getName());
+		field.setAccessible(true);
+		FIELD_CACHE.put(argument, field);
+		return field;
+	}
+	
 
 	/**
 	 * Returns builded argument information.
@@ -154,6 +250,6 @@ public class ArgumentBuilder {
 	@Override
 	public String toString() {
 		return builder.toString();
-	}	
-	
+	}
+
 }

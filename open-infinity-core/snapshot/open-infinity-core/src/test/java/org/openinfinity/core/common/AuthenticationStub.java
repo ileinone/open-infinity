@@ -17,7 +17,6 @@ package org.openinfinity.core.common;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

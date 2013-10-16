@@ -23,14 +23,12 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.springframework.stereotype.Component;
-
 import org.openinfinity.common.infrastructure.AnnotatedEmbedderUsingSpring;
-import org.openinfinity.core.aspect.ExceptionTranslatorAspect;
 import org.openinfinity.core.common.UnknownException;
 import org.openinfinity.core.exception.ApplicationException;
 import org.openinfinity.core.exception.BusinessViolationException;
 import org.openinfinity.core.exception.SystemException;
+import org.springframework.stereotype.Component;
 
 /**
  * Functional test class for exception aspect.

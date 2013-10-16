@@ -20,9 +20,8 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.springframework.aop.framework.AopConfigException;
-
 import org.openinfinity.core.exception.SystemException;
+import org.springframework.aop.framework.AopConfigException;
 
 /**
  * Utility for handling aspect specific features.

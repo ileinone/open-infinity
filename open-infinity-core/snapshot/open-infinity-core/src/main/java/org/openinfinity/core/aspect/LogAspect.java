@@ -20,12 +20,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.openinfinity.core.annotation.Log;
 import org.openinfinity.core.annotation.Log.LogLevel;
 import org.openinfinity.core.util.AspectUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is responsible of the logging using AOP with annotation <code>org.openinfinity.core.annotation.Log</code>.

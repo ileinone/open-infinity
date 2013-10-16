@@ -20,14 +20,13 @@ import static org.openinfinity.core.util.ExceptionUtil.getStackTraceString;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.openinfinity.core.exception.ApplicationException;
+import org.openinfinity.core.exception.BusinessViolationException;
+import org.openinfinity.core.exception.SystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
-
-import org.openinfinity.core.exception.ApplicationException;
-import org.openinfinity.core.exception.BusinessViolationException;
-import org.openinfinity.core.exception.SystemException;
 
 /**
  * Aspect for handling service level exception translation. 

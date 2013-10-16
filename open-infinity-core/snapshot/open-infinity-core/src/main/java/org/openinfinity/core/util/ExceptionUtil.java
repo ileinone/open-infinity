@@ -18,13 +18,12 @@ package org.openinfinity.core.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.openinfinity.core.exception.ApplicationException;
 import org.openinfinity.core.exception.BusinessViolationException;
 import org.openinfinity.core.exception.ExceptionLevel;
 import org.openinfinity.core.exception.SystemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Exception utility class which offers basic methods for exception throwing and stack trace resolving. 

@@ -7,7 +7,7 @@
 	<name>Open Infinity Core Latest snapshot</name>
 	<description>Core Asset Base for Open Infinity based software projects.</description>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.maven.artifact.version>3.1.4.RELEASE</spring.maven.artifact.version>
@@ -28,6 +28,8 @@
 		<ehcache.core.version>2.6.6</ehcache.core.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<hdiv.version>2.1.4</hdiv.version>
+		<keyczar.version>0.71g</keyczar.version>
+		<commons.codec.version>1.8</commons.codec.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -240,6 +242,17 @@
 			<groupId>org.hdiv</groupId>
 			<artifactId>hdiv-jstl-taglibs-1.2</artifactId>
 			<version>${hdiv.version}</version>
+		</dependency>
+		<!-- Cryptography libraries -->
+		<dependency>
+			<groupId>org.keyczar</groupId>
+			<artifactId>keyczar</artifactId>
+			<version>${keyczar.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons.codec.version}</version>
 		</dependency>
 		<!-- test scoped dependencies -->
 		<dependency>
@@ -500,17 +513,6 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-		<!-- <repository> -->
-		<!-- <id>labs-consol-snapshot</id> -->
-		<!-- <name>ConSol* Labs Repository (Snapshots)</name> -->
-		<!-- <url>http://labs.consol.de/maven/snapshots-repository</url> -->
-		<!-- <snapshots> -->
-		<!-- <enabled>true</enabled> -->
-		<!-- </snapshots> -->
-		<!-- <releases> -->
-		<!-- <enabled>false</enabled> -->
-		<!-- </releases> -->
-		<!-- </repository> -->
 		<repository>
 			<id>raven-repository</id>
 			<name>Maven Repository</name>

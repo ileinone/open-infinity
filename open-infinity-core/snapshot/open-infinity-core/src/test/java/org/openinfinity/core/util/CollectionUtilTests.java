@@ -25,9 +25,6 @@ import java.util.Set;
 import junit.framework.Assert;
 
 import org.junit.Test;
-import org.openinfinity.core.util.CollectionElementCallback;
-import org.openinfinity.core.util.CollectionElementUtil;
-import org.openinfinity.core.util.MapElementCallback;
 
 /**
  * Unit test for collection utility.

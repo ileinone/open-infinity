@@ -15,18 +15,13 @@
  */
 package org.openinfinity.core.exception;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import org.openinfinity.core.exception.ApplicationException;
-import org.openinfinity.core.exception.BusinessViolationException;
-import org.openinfinity.core.exception.SystemException;
-import org.openinfinity.core.exception.ExceptionLevel;
 
 /**
  * Unit test for core exceptions.

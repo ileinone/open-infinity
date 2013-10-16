@@ -24,14 +24,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.openinfinity.core.annotation.AuditTrail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import org.openinfinity.core.annotation.AuditTrail;
 
 /**
  * Class is responsible for creating audit trail information. Audit trail storage system can be defined through Log4j property files (JDBCAppender, FileAppender, JMSAppender etc).
