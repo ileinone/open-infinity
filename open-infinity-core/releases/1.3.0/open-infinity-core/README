@@ -37,7 +37,8 @@ mvn clean install
 Install Open Infinity Core:
 mkdir <open-infinity-core>
 git clone https://github.com/ileinone/open-infinity
-cd <open-infinity-core>/releases/openinfinity-core/1.1.1
+cd <open-infinity-core>/releases/openinfinity-core/1.3.0
+vi src/test/resources/properties/crypto.properties (define paths to your local file system for public and private keys)
 Use maven for compiling, testing, packaging and installing Open Infinity Core -component to local Maven repository with command:
 mvn clean lombok:delombok install
 
