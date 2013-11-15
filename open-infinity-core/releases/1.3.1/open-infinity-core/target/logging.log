@@ -1,0 +1,28 @@
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: org.openinfinity.core.common.domain.Account=[Account(id=1, name=Name1, address=test)] 
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: true
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: finalized in 41 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: org.openinfinity.core.common.domain.Account=[Account(id=<script>, name=</script>, address=;)] 
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: false
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.validateMe: finalized in 6 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.log: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.log: without any parameters
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.log: true
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.log: finalized in 0 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithNoArguments: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithNoArguments: not showing arguments
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithNoArguments: foo
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithNoArguments: finalized in 0 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMe: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMe: java.lang.String=[Logging you!] java.lang.Long=[23423] 
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMe: true
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMe: finalized in 1 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithSpecifiedArguments: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithSpecifiedArguments: org.openinfinity.core.common.domain.Account.id=[2] org.openinfinity.core.common.domain.Account.name=[Name3] 
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithSpecifiedArguments: without any return value (void)
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithSpecifiedArguments: finalized in 1 ms
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithFalseArguments: initialized
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithFalseArguments: org.openinfinity.core.common.domain.Account.id=[2] org.openinfinity.core.common.domain.Account.name=[Name3] 
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithFalseArguments: without any return value (void)
+DEBUG: org.openinfinity.core.aspect.LogAspect - IntegrationTest.logMeWithFalseArguments: finalized in 2 ms

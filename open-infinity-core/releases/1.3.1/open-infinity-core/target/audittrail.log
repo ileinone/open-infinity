@@ -1,0 +1,5 @@
+INFO : org.openinfinity.core.aspect.AuditTrailAspect - Timestamp: [2013-11-15T08:39:37.286+02:00]  Method: [auditMe] org.openinfinity.core.common.domain.Account.id=[1] org.openinfinity.core.common.domain.Account.name=[Name1] 
+INFO : org.openinfinity.core.aspect.AuditTrailAspect - Timestamp: [2013-11-15T08:39:37.327+02:00]  Method: [auditMeWithAllArguments]  Username: [user not authenticated] org.openinfinity.core.common.domain.Account=[Account(id=1, name=Name1, address=null)] 
+INFO : org.openinfinity.core.aspect.AuditTrailAspect - Timestamp: [2013-11-15T08:39:37.329+02:00]  Method: [auditMeWithNoArguments]  Username: [user not authenticated] 
+INFO : org.openinfinity.core.aspect.AuditTrailAspect - Timestamp: [2013-11-15T08:39:37.331+02:00]  Method: [auditMeWithPrimitiveFields]  Username: [user not authenticated] java.lang.String=[testId13131313122] 
+INFO : org.openinfinity.core.aspect.AuditTrailAspect - Timestamp: [2013-11-15T08:39:37.333+02:00]  Method: [auditMeWithFalseField]  Username: [user not authenticated] org.openinfinity.core.common.domain.Account=[Account(id=<script>, name=Name2, address=null)] 

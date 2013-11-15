@@ -25,7 +25,7 @@
 		<joda.time.version>2.2</joda.time.version>
 		<lombok.version>0.11.8</lombok.version>
 		<jolokia.version>1.1.1</jolokia.version>
-		<ehcache.core.version>2.6.6</ehcache.core.version>
+		<ehcache.version>2.7.1</ehcache.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<hdiv.version>2.1.4</hdiv.version>
 		<keyczar.version>0.71g</keyczar.version>
@@ -144,8 +144,8 @@
 		</dependency>
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache-core</artifactId>
-			<version>${ehcache.core.version}</version>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
 		</dependency>
 		<!-- Monitoring API -->
 		<dependency>
@@ -306,6 +306,10 @@
 	</dependencies>
 	<build>
 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
 			<!-- standard Maven folder -->
 			<resource>
 				<directory>src/main/resources</directory>

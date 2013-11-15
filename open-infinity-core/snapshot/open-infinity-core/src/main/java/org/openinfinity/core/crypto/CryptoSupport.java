@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2011-2013 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.openinfinity.core.crypto;
 
 import java.io.ByteArrayInputStream;
@@ -6,18 +21,15 @@ import java.nio.ByteBuffer;
 
 import org.apache.commons.codec.binary.Base64;
 import org.keyczar.Crypter;
-import org.keyczar.Encrypter;
 import org.keyczar.exceptions.KeyczarException;
 import org.openinfinity.core.util.ExceptionUtil;
 import org.openinfinity.core.util.IOUtil;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * Object for supporting encryption and decryption of the entity fields. Handles Base64 encoding with <code>java.util.String</code> fields.
  * 
  * @author Ilkka Leinonen
- * @Version 1.0.0 - Initial version
+ * @version 1.1.0 - Added support for symmetric and asymmetric cryptography extensions.
  * @Since 1.3.0
  *
  */
@@ -31,67 +43,62 @@ public class CryptoSupport {
 	/**
 	 * Encrypter for managing encryption functions. 
 	 */
-	private Encrypter encrypter;
 	
 	/**
-	 * Decrypter for managing decryption functions. 
+	 * Crypter for managing decryption functions. 
 	 */
 	private Crypter crypter;
 	
 	/**
-	 * Defines the public key path.
+	 * Defines the symmetric public key path.
 	 */
-	@Value("${rsa.public.key.path}")
-	private String rsaPublicKeyPath;
+	private String asymmetricPublicKeyPath;
 	
 	/**
-	 * Defines the private key path.
+	 * Defines the symmetric private key path.
 	 */
-	@Value("${rsa.private.key.path}")
-	private String rsaPrivateKeyPath;
+	private String asymmetricPrivateKeyPath;
+	
+	/**
+	 * Defines the symmetric key path.
+	 */
+	private String symmetricKeyPath;
 	
 	/**
 	 * Setter for public key path.
 	 * 
-	 * @param rsaPublicKeyPath Represents the actual key path.
+	 * @param asymmetricPublicKeyPath Represents the actual key path.
 	 */
-	public void setRsaPublicKeyPath(String rsaPublicKeyPath) {
-		this.rsaPublicKeyPath = rsaPublicKeyPath;
+	public void setAsymmetricPublicKeyPath(String asymmetricPublicKeyPath) {
+		this.asymmetricPublicKeyPath = asymmetricPublicKeyPath;
 	}
 	
 	/**
 	 * Setter for private key path.
 	 * 
-	 * @param rsaPrivateKeyPath Represents the actual key path.
+	 * @param asymmetricPrivateKeyPath Represents the actual key path.
 	 */
-	public void setRsaPrivateKeyPath(String rsaPrivateKeyPath) {
-		this.rsaPrivateKeyPath = rsaPrivateKeyPath;
+	public void setAsymmetricPrivateKeyPath(String asymmetricPrivateKeyPath) {
+		this.asymmetricPrivateKeyPath = asymmetricPrivateKeyPath;
+	}
+		
+
+	
+	public void setSymmetricKeyPath(String symmetricKeyPath) {
+		this.symmetricKeyPath = symmetricKeyPath;
 	}
 
-	/**
-	 * Default constructor for the class.
-	 */
-	public CryptoSupport() {
-		try {
-			encrypter = new Encrypter(rsaPublicKeyPath);
-			crypter = new Crypter(rsaPrivateKeyPath);
-		} catch (KeyczarException keyczarException) {
-			ExceptionUtil.throwSystemException("CryptoSupport initialization failed: " + keyczarException.getMessage(), keyczarException);
-		}
-	}
-	
 	/**
 	 * Constructor with public and private key paths.
 	 * 
 	 * @param rsaPublicKeyPath Represents the actual public key path.
 	 * @param rsaPrivateKeyPath Represents the actual private key path.
 	 */
-	public CryptoSupport(@Value("${rsa.public.key.path}") String rsaPublicKeyPath, @Value("${rsa.private.key.path}") String rsaPrivateKeyPath) {
+	public CryptoSupport(String asymmetricPublicKeyPath, String asymmetricPrivateKeyPath) {
 		try {
-			this.rsaPublicKeyPath  = rsaPublicKeyPath;
-			this.rsaPrivateKeyPath = rsaPrivateKeyPath;
-			encrypter = new Encrypter(rsaPublicKeyPath);
-			crypter = new Crypter(rsaPrivateKeyPath);
+			this.asymmetricPublicKeyPath  = asymmetricPublicKeyPath;
+			this.asymmetricPrivateKeyPath = asymmetricPrivateKeyPath;
+			crypter = new Crypter(asymmetricPrivateKeyPath);
 		} catch (KeyczarException keyczarException) {
 			ExceptionUtil.throwSystemException("CryptoSupport initialization failed: " + keyczarException.getMessage(), keyczarException);
 		}
@@ -100,11 +107,11 @@ public class CryptoSupport {
 	/**
 	 * Constructor with public key path.
 	 * 
-	 * @param rsaPublicKeyPath Represents the actual public key path.
+	 * @param symmetricKeyPath Represents the actual symmetric key path.
 	 */
-	public CryptoSupport(@Value("${rsa.public.key.path}") String rsaPublicKeyPath) {
+	public CryptoSupport(String symmetricKeyPath) {
 		try {
-			encrypter = new Encrypter(rsaPublicKeyPath);
+			crypter = new Crypter(symmetricKeyPath);
 		} catch (KeyczarException keyczarException) {
 			ExceptionUtil.throwSystemException("CryptoSupport initialization failed: " + keyczarException.getMessage(), keyczarException);
 		}
@@ -118,7 +125,7 @@ public class CryptoSupport {
 	 */
 	public void encrypt(ByteBuffer inboundBuffer, ByteBuffer outboundBuffer) {
 		try {
-			encrypter.encrypt(inboundBuffer, outboundBuffer);
+			crypter.encrypt(inboundBuffer, outboundBuffer);
 		} catch (KeyczarException keyczarException) {
 			ExceptionUtil.throwSystemException("Encryption failed.", keyczarException);
 		}
@@ -146,7 +153,7 @@ public class CryptoSupport {
 	 */
 	public byte[] encrypt(byte[] input) {
 		try {
-			return encrypter.encrypt(input);
+			return crypter.encrypt(input);
 		} catch (KeyczarException keyczarException) {
 			ExceptionUtil.throwSystemException("Encryption failed.", keyczarException);
 		}
