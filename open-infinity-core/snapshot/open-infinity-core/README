@@ -19,7 +19,7 @@ mkdir <your location>
 cd <your location>
 git clone https://code.google.com/p/keyczar/
 cd <your location>/keyczar/java/code/
-git tag Java_release_0.71g
+git checkout Java_release_0.71g
 mvn clean install
 cd target
 
