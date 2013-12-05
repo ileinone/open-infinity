@@ -4,7 +4,7 @@ v.1.3.1.RELEASE - Bug fixes with following content
 
 + CryptoSupport support for symmetric and asymmetric security algorithms.
 
-Upgrades to Maven dependencies
+Upgrades to Maven dependencies:
 
 - ehcache version upgrade to 2.7.1
 
