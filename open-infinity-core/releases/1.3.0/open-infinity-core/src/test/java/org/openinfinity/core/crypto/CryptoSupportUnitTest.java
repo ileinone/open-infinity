@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openinfinity.core.util.IOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -29,7 +30,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Unit test for crypto support object.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
+ * @version 1.1.0 - Added support for symmetric and asymmetric cryptography extensions.
  * @since 1.3.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,18 +41,23 @@ public class CryptoSupportUnitTest {
 	private static final String EXPECTED_PLAIN_TEXT = "Open Infinity Rocks";
 	
 	@Autowired
-	private CryptoSupport cryptoSupport;
+	@Qualifier("asymmetricCryptoSupport")
+	private CryptoSupport asymmetricCryptoSupport;
+	
+	@Autowired
+	@Qualifier("symmetricCryptoSupport")
+	private CryptoSupport symmetricCryptoSupport;
 	
 	@Test
 	public void givenPublicRSAKeyWhenEncryptingContentThenResultMustNotBePlainText() {
-		byte[] actual = cryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
+		byte[] actual = asymmetricCryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
 		assertNotSame(EXPECTED_PLAIN_TEXT, actual.toString());
 	}
 	
 	@Test
 	public void givenPublicAndPrivateRSAKeyWhenEncryptingContentAndDecryptingItThenResultMustBePlainText() {
-		byte[] encryptedBytes = cryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
-		byte[] actual = cryptoSupport.decrypt(encryptedBytes);
+		byte[] encryptedBytes = asymmetricCryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
+		byte[] actual = asymmetricCryptoSupport.decrypt(encryptedBytes);
 		String actualPlainText = new String(actual);
 		System.out.println(actualPlainText);
 		assertEquals(EXPECTED_PLAIN_TEXT, actualPlainText);
@@ -60,16 +66,49 @@ public class CryptoSupportUnitTest {
 	@Test
 	public void givenPublicRSAKeyWhenEncryptingContentWithPlainBytesThenResultMustNotBePlainText() {
 		byte[] plainBytes = IOUtil.getBytes(EXPECTED_PLAIN_TEXT);
-		String actual = cryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
+		String actual = asymmetricCryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
 		assertNotSame(EXPECTED_PLAIN_TEXT, actual);
 	}
 	
 	@Test
 	public void givenPublicAndPrivateRSAKeyWhenEncryptingContentWithPlainBytesAndDecryptingItThenResultMustBePlainText() {
 		byte[] plainBytes = IOUtil.getBytes(EXPECTED_PLAIN_TEXT);
-		String base64PresentationOfEncryptedBytes = cryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
+		String base64PresentationOfEncryptedBytes = asymmetricCryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
 		byte[] encryptedBase64Bytes = IOUtil.getBytes(base64PresentationOfEncryptedBytes);
-		String actual = cryptoSupport.decryptAndReturnBase64Presentation(encryptedBase64Bytes, ENCODING);
+		String actual = asymmetricCryptoSupport.decryptAndReturnBase64Presentation(encryptedBase64Bytes, ENCODING);
+		String actualPlainText = new String(actual);
+		System.out.println(actualPlainText);
+		assertEquals(EXPECTED_PLAIN_TEXT, actualPlainText);
+	}
+	
+	@Test
+	public void givenSymmetricAESKeyWhenEncryptingContentThenResultMustNotBePlainText() {
+		byte[] actual = symmetricCryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
+		assertNotSame(EXPECTED_PLAIN_TEXT, actual.toString());
+	}
+	
+	@Test
+	public void givenSymmetricAESKeyWhenEncryptingContentAndDecryptingItThenResultMustBePlainText() {
+		byte[] encryptedBytes = symmetricCryptoSupport.encrypt(EXPECTED_PLAIN_TEXT.getBytes());
+		byte[] actual = symmetricCryptoSupport.decrypt(encryptedBytes);
+		String actualPlainText = new String(actual);
+		System.out.println(actualPlainText);
+		assertEquals(EXPECTED_PLAIN_TEXT, actualPlainText);
+	}
+	
+	@Test
+	public void givenSymmetricAESKeyWhenEncryptingContentWithPlainBytesThenResultMustNotBePlainText() {
+		byte[] plainBytes = IOUtil.getBytes(EXPECTED_PLAIN_TEXT);
+		String actual = symmetricCryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
+		assertNotSame(EXPECTED_PLAIN_TEXT, actual);
+	}
+	
+	@Test
+	public void givenSymmetricAESKeyWhenEncryptingContentWithPlainBytesAndDecryptingItThenResultMustBePlainText() {
+		byte[] plainBytes = IOUtil.getBytes(EXPECTED_PLAIN_TEXT);
+		String base64PresentationOfEncryptedBytes = symmetricCryptoSupport.encryptAndReturnBase64Presentation(plainBytes, ENCODING);
+		byte[] encryptedBase64Bytes = IOUtil.getBytes(base64PresentationOfEncryptedBytes);
+		String actual = symmetricCryptoSupport.decryptAndReturnBase64Presentation(encryptedBase64Bytes, ENCODING);
 		String actualPlainText = new String(actual);
 		System.out.println(actualPlainText);
 		assertEquals(EXPECTED_PLAIN_TEXT, actualPlainText);
