@@ -30,6 +30,7 @@ import org.openinfinity.core.annotation.AuditTrail;
 import org.openinfinity.core.annotation.Decrypt;
 import org.openinfinity.core.annotation.Encrypt;
 import org.openinfinity.core.annotation.Log;
+import org.openinfinity.core.annotation.MultiTenant;
 import org.openinfinity.core.aspect.ArgumentStrategy;
 import org.openinfinity.core.common.domain.Account;
 import org.openinfinity.core.util.ExceptionUtil;
@@ -151,6 +152,11 @@ public class IntegrationTestBean implements IntegrationTest {
 	@Decrypt(argumentStrategy = ArgumentStrategy.CUSTOM,  value = {"name", "address"})
 	public Account decryptMeWithSpecifiedAttributes(Account account) {
 		LOGGER.debug("Account: " + account.toString());
+		return account;
+	}
+
+	@MultiTenant
+	public Account addMeTenantId(Account account) {
 		return account;
 	}
 	

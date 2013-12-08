@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedCheckedException;
 import org.springframework.core.NestedRuntimeException;
+import org.springframework.core.Ordered;
 
 /**
  * Aspect for handling service level exception translation. 
@@ -48,12 +49,26 @@ import org.springframework.core.NestedRuntimeException;
  * @since 1.0.0
  */
 @Aspect
-public class ExceptionTranslatorAspect {
+public class ExceptionTranslatorAspect implements Ordered {
 	
 	/**
 	 * Logger for this class.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionTranslatorAspect.class);
+	
+	/**
+	 * Represents the execution order of the aspect.
+	 */
+	private int order;
+	
+	/**
+	 * Setter for the order.
+	 * 
+	 * @param order Represents the execution order of the aspect.
+	 */
+	public void setOrder(int order) {
+		this.order = order;
+	}
 	
 	/**
 	 *  Uses <code>org.springframework.stereotype.Component</code> annotation for the point cut resolving.
@@ -150,6 +165,11 @@ public class ExceptionTranslatorAspect {
 			systemException.setLogged(true);
 			throw systemException;
 		}
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
 	}
 	
 }

@@ -50,6 +50,10 @@
 		<level value="debug" />
 		<appender-ref ref="crypto" />
 	</logger>
+	<logger name="org.openinfinity.core.aspect.MultiTenantAspect">
+		<level value="error" />
+		<appender-ref ref="console" />
+	</logger>
 	<logger name="org.springframework.test.context.junit4">
 		<level value="debug" />
 		<appender-ref ref="console" />

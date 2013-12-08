@@ -27,6 +27,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.openinfinity.core.annotation.AuditTrail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -40,12 +41,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * @since 1.0.0
  */
 @Aspect
-public class AuditTrailAspect {
+public class AuditTrailAspect implements Ordered {
 
 	/**
 	 * Logger for this class.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuditTrailAspect.class);
+	
+	/**
+	 * Represents the execution order of the aspect.
+	 */
+	private int order;
+	
+	/**
+	 * Setter for the order.
+	 * 
+	 * @param order Represents the execution order of the aspect.
+	 */
+	public void setOrder(int order) {
+		this.order = order;
+	}
 	
 	/**
 	 *  Uses <code>org.openinfinity.core.annotation.AuditTrail</code> annotation for the AspectJ's pointcut resolving.
@@ -133,6 +148,11 @@ public class AuditTrailAspect {
 			String timeStamp = fmt.print(dateTime);
 			builder.append("Timestamp: ").append("[").append(timeStamp).append("] ");
 		}
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
 	}
 	
 }

@@ -25,6 +25,7 @@ import org.openinfinity.core.annotation.Log.LogLevel;
 import org.openinfinity.core.util.AspectUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 
 /**
  * This class is responsible of the logging using AOP with annotation <code>org.openinfinity.core.annotation.Log</code>.
@@ -34,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * @since 1.0.0
  */
 @Aspect
-public class LogAspect extends ArgumentGatheringJoinPointInterceptor {
+public class LogAspect extends ArgumentGatheringJoinPointInterceptor implements Ordered {
 	/**
 	 * Represents the main logger for the application.
 	 */
@@ -76,11 +77,30 @@ public class LogAspect extends ArgumentGatheringJoinPointInterceptor {
 	private Integer defaultLogLevel = LOG_LEVEL_NOT_SET;
 	
 	/**
+	 * Represents the execution order of the aspect.
+	 */
+	private int order;
+	
+	/**
+	 * Setter for the order.
+	 * 
+	 * @param order Represents the execution order of the aspect.
+	 */
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	
+	/**
 	 *  Uses <code>org.openinfinity.core.annotation.Log</code> annotation for the point cut resolving.
 	 */
 	@Pointcut("@annotation(org.openinfinity.core.annotation.Log)")
 	public void loggedMethod(){}
 	
+	/**
+	 * Setter for the default log level.
+	 * 
+	 * @param defaultLogLevel Represents the default log level for the aspect.
+	 */
 	public void setDefaultLogLevel(Integer defaultLogLevel) {
 		this.defaultLogLevel = defaultLogLevel;
 	}
@@ -213,6 +233,11 @@ public class LogAspect extends ArgumentGatheringJoinPointInterceptor {
 		} finally {
 			LOGGER.debug(name + ": finalized in " + (System.currentTimeMillis()-startTime) + " ms");
 		}
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
 	}
 	
 }

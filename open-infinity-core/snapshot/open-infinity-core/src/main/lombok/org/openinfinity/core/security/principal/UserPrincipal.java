@@ -27,16 +27,25 @@ import java.security.Principal;
  */
 public class UserPrincipal implements Principal, Serializable {
 
+	/**
+	 * Represents the user's name.
+	 */
 	private String username;
 	
 	public UserPrincipal(String username) {
 		this.username = username;
 	}
 	
+	/**
+	 * Getter for the name.
+	 */
 	public String getName() {
 		return username;
 	}
 	
+	/**
+	 * Clears the name of the UserPrincipal.
+	 */
 	protected void clear() {
 		this.username = null;
 	}

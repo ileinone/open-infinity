@@ -46,6 +46,7 @@
 	<context:property-placeholder location="classpath:META-INF/properties/crypto.properties,classpath:META-INF/properties/logging.properties" />
 	
 	<aop:aspectj-autoproxy>
+		<aop:include name="multiTenantAspect" />
 		<aop:include name="logAspect" />
 		<aop:include name="auditTrailAspect" />
 		<aop:include name="exceptionTranslatorAspect" />
@@ -59,6 +60,8 @@
 	<bean id="logAspect" class="org.openinfinity.core.aspect.LogAspect">
 		<property name="defaultLogLevel" value="${logging.level}" />
 	</bean>
+	
+	<bean id="multiTenantAspect" class="org.openinfinity.core.aspect.MultiTenantAspect" />
 	
 	<bean id="cryptoAspect" class="org.openinfinity.core.aspect.CryptoAspect">
 		<property name="cryptoSupport" ref="asymmetricCryptoSupport" />

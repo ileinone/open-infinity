@@ -28,6 +28,7 @@ import org.openinfinity.core.util.ExceptionUtil;
 import org.openinfinity.core.util.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 /**
  * Aspect for handling cryptography on method level with entities and their attributes.
  * 
@@ -36,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * @since 1.0.0
  */
 @Aspect
-public class CryptoAspect {
+public class CryptoAspect implements Ordered {
 	
 	/**
 	 * Logger for this class.
@@ -74,6 +75,20 @@ public class CryptoAspect {
 		this.encoding = encoding;
 	}
 
+	/**
+	 * Represents the execution order of the aspect.
+	 */
+	private int order;
+	
+	/**
+	 * Setter for the order.
+	 * 
+	 * @param order Represents the execution order of the aspect.
+	 */
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	
 	/**
 	 * Pointcut for each <code>org.openinfinity.core.annotation.Crypto</code> found from methods. 
 	 */
@@ -219,6 +234,11 @@ public class CryptoAspect {
 		} catch (Throwable throwable) {
 			LOGGER.error("Error occurred while setting bytes to field: " + throwable.getMessage(), throwable);
 		}
+	}
+
+	@Override
+	public int getOrder() {
+		return order;
 	}
 	
 }

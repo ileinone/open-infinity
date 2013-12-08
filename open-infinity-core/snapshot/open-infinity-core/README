@@ -1,5 +1,53 @@
 Open Infinity Core - a solution accelerator framework.
 
+v.1.4.0.RELEASE - New features with the following content
+
++ BaseEntity support with lifecycle information support for standardized data models.
++ MultiTenantBaseEntity for shared schema context in SaaS solutions.
++ MultiTenantAspect support for injecting tenant id to domain entities.
+
+Packaging instructions
+
+Maven installation:
+Download configuration management tool (Maven 3) and install it (notice that Java Runtime 1.6 is needed):
+http://maven.apache.org/download.html
+
+Installing gryptography extensions:
+mkdir <your location>
+cd <your location>
+git clone https://code.google.com/p/keyczar/
+cd <your location>/keyczar/java/code/
+git checkout Java_release_0.71g
+mvn clean install
+cd target
+
+Signing public and private keys with Keyczar:
+
+Asymmetric cryptography extension
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar create --location=<your location>/security/asymmetric --name="Open Infinity" --purpose=crypt --asymmetric=rsa
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar addkey --location=<your location>/security/asymmetric --status=primary
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar pubkey --location=<your location>/security/asymmetric --destination=<your location>/security/pubkey
+
+Symmetric cryptography extension
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar create --location=<your location>/security/symmetric --name="Open Infinity" --purpose=crypt
+java -jar KeyczarTool-0.71g-<mmDDyyyy>.jar addkey --location=<your location>/security/symmetric --name="Open Infinity" --status=primary
+
+Install Lombok:
+mkdir <lombok-directory>
+cd <lombok-directory>
+git clone https://github.com/awhitford/lombok.maven
+cd lombok.maven
+Use maven for compiling, testing, packaging lombok -plugin to local Maven repository with command:
+mvn clean install
+
+Install Open Infinity Core:
+mkdir <open-infinity-core>
+git clone https://github.com/ileinone/open-infinity
+cd <open-infinity-core>/releases/openinfinity-core/1.4.0
+vi src/test/resources/properties/crypto.properties (define paths to your local file system for asymmetric and symmetric keys)
+Use maven for compiling, testing, packaging and installing Open Infinity Core -component to local Maven repository with command:
+mvn clean lombok:delombok install
+
 v.1.3.1.RELEASE - Bug fixes with following content
 
 + CryptoSupport support for symmetric and asymmetric security algorithms.

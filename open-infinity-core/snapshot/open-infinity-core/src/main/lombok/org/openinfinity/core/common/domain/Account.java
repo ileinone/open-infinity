@@ -17,10 +17,12 @@ package org.openinfinity.core.common.domain;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.openinfinity.core.annotation.NotScript;
+import org.openinfinity.core.domain.entity.MultiTenantBaseEntity;
 
 /**
  * Domain object example.
@@ -30,8 +32,9 @@ import org.openinfinity.core.annotation.NotScript;
  * @since 1.0.0
  */
 @Data
-@RequiredArgsConstructor(access=AccessLevel.PUBLIC)
-public class Account {  
+@EqualsAndHashCode (callSuper = true)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
+public class Account extends MultiTenantBaseEntity<String, String> {  
 
 	@NonNull @NotScript private String id;
 	@NonNull @NotScript private String name;

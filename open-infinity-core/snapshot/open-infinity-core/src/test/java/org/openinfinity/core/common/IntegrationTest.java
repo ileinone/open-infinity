@@ -66,4 +66,6 @@ public interface IntegrationTest {
 	
 	public boolean validateMe(Account account);
 	
+	public Account addMeTenantId(Account account);
+	
 }

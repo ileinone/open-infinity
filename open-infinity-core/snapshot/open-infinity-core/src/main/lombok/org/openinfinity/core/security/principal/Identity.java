@@ -22,6 +22,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,40 +37,35 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  * @version 1.0.0
  * @since 1.4.0
  */
+@Data
+@EqualsAndHashCode
 public class Identity implements Authentication, Serializable {
 
+	/**
+	 * Represents the user principal for the user session.
+	 */
 	private UserPrincipal userPrincipal;
 	
+	/**
+	 * Represents the state of the authentication process.
+	 */
 	private boolean authenticated;
 	
+	/**
+	 * Represents the collection of role principals.
+	 */
 	private Collection<RolePrincipal> rolePrincipals;
 	
-	private TenantPrincipal tenantPrincipal;
-
-	public UserPrincipal getUserPrincipal() {
-		return userPrincipal;
-	}
-
-	public void setUserPrincipal(UserPrincipal userPrincipal) {
-		this.userPrincipal = userPrincipal;
-	}
-
-	public TenantPrincipal getTenantPrincipal() {
-		return tenantPrincipal;
-	}
-
-	public void setTenantPrincipal(TenantPrincipal tenantPrincipal) {
-		this.tenantPrincipal = tenantPrincipal;
-	}
-
-	public Collection<RolePrincipal> getRolePrincipals() {
-		return rolePrincipals;
-	}
-
-	public void setRolePrincipals(Collection<RolePrincipal> rolePrincipals) {
-		this.rolePrincipals = rolePrincipals;
-	}
+	/**
+	 * Represents the tenant principal.
+	 */
+	private TenantPrincipal<?> tenantPrincipal;
 	
+	/**
+	 * Returns all roles associated with the user.
+	 * 
+	 * @return
+	 */
 	public List<String> getRoles() {
 		List<String> roles = new ArrayList<String>();
 		for (RolePrincipal rolePrincipal : rolePrincipals) {
@@ -76,6 +74,11 @@ public class Identity implements Authentication, Serializable {
 		return Collections.unmodifiableList(roles);
 	}
 	
+	/**
+	 * Returns all principals for the user.
+	 * 
+	 * @return
+	 */
 	public Collection<Principal> getAllPrincipalsForIdentity() {
 		Collection<Principal> principals = new ArrayList<Principal>();
 		principals.add(userPrincipal);
@@ -84,6 +87,9 @@ public class Identity implements Authentication, Serializable {
 		return Collections.unmodifiableCollection(principals);
 	}
  	
+	/**
+	 * Clears the context of the identity.
+	 */
 	public void clear() {
 		this.userPrincipal.clear();
 		this.tenantPrincipal.clear();
@@ -96,6 +102,12 @@ public class Identity implements Authentication, Serializable {
 		this.rolePrincipals = null;
 	}
 	
+	/**
+	 * Calculates checksum with salt information for the identity. String presentation of the SHA-512 algorithm will be returned.
+	 * 
+	 * @param salt Represents the salt
+	 * @return
+	 */
 	public String checksum(String salt) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(salt);
@@ -114,6 +126,9 @@ public class Identity implements Authentication, Serializable {
 		return checksum;
 	}
 
+	/**
+	 * Returns collections of GrantedAuthorities for the user.
+	 */
 	public Collection<GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		for (Principal principal : getAllPrincipalsForIdentity()) {
@@ -123,44 +138,58 @@ public class Identity implements Authentication, Serializable {
 		return grantedAuthorities;
 	}
 
+	/**
+	 * Returns always "N/A, Not Available".
+	 * 
+	 * @return Returns always "N/A, Not Available".
+	 */
 	public String getPassword() {
-		return "Sweet-Smell-Of-Danger-Not-Exposed-2-U";
+		return "N/A";
 	}
 
+	/**
+	 * Returns name for the user principal.
+	 */
 	public String getName() {
 		return userPrincipal.getName();
 	}
 
+	/**
+	 * Returns name for the user principal.
+	 */
 	public Object getCredentials() {
 		return userPrincipal.getName();
 	}
 
+	/**
+	 * Returns the identity object itself.
+	 */
 	public Object getDetails() {
 		return this;
 	}
 
+	/**
+	 * Returns user principal associated with the identity.
+	 */
 	public Object getPrincipal() {
 		return userPrincipal;
 	}
 
+	/**
+	 * Returns state of the authentication process.
+	 */
 	public boolean isAuthenticated() {
-		return true;
+		return this.authenticated;
 	}
 
+	/**
+	 * Setter for the state of authentication process.
+	 */
 	public void setAuthenticated(boolean isAuthenticated)
 			throws IllegalArgumentException {
 		this.authenticated = isAuthenticated;
 		
 	}
-
-	@Override
-	public String toString() {
-		return "Identity [userPrincipal=" + userPrincipal + ", authenticated="
-				+ authenticated + ", rolePrincipals=" + rolePrincipals
-				+ ", tenantPrincipal=" + tenantPrincipal + "]";
-	}
-	
-	
 	
 
 }

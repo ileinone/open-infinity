@@ -27,16 +27,25 @@ import java.security.Principal;
  */
 public class RolePrincipal implements Principal, Serializable {
 
+	/**
+	 * Represents the role's name.
+	 */
 	private String name;
 	
 	public RolePrincipal(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Getter for the role.
+	 */
 	public String getName() {
 		return this.name;	
 	}
 	
+	/**
+	 * Clears the name.
+	 */
 	protected void clear() {
 		this.name = null;
 	}

@@ -29,6 +29,9 @@ public class TenantPrincipal<T> implements Principal, Serializable {
 
 	private static final long serialVersionUID = -7578304336637935322L;
 
+	/**
+	 * Represents the tenant id object.
+	 */
 	private T tenantId;
 	
 	public TenantPrincipal(T tenantId) {
@@ -36,14 +39,25 @@ public class TenantPrincipal<T> implements Principal, Serializable {
 		this.tenantId = tenantId;
 	}
 
+	/**
+	 * Getter for the tenant id as String.
+	 */
 	public String getName() {
 		return this.tenantId.toString();
 	}
 	
+	/**
+	 * Getter for the tenant id.
+	 * 
+	 * @return T Represents the tenant id object.
+	 */
 	public T getId() {
 		return this.tenantId;
 	}
 	
+	/**
+	 * Clears the tenant id.
+	 */
 	protected void clear() {
 		this.tenantId = null;
 	}
