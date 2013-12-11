@@ -15,7 +15,7 @@
 		<spring.batch.core.version>2.2.0.RELEASE</spring.batch.core.version>
 		<jbehave.version>3.8</jbehave.version>
 		<jbehave.web.selenium.version>3.5.5</jbehave.web.selenium.version>
-		<junit.version>4.8.2</junit.version>
+		<junit.version>4.11</junit.version>
 		<mockito.version>1.9.5</mockito.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<hsqldb.version>2.2.9</hsqldb.version>

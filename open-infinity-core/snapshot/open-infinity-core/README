@@ -6,6 +6,10 @@ v.1.4.0.RELEASE - New features with the following content
 + MultiTenantBaseEntity for shared schema context in SaaS solutions.
 + MultiTenantAspect support for injecting tenant id to domain entities.
 
+Upgrades to Maven dependencies:
+
+- jUnit support level upgraded to 4.11
+
 Packaging instructions
 
 Maven installation:
