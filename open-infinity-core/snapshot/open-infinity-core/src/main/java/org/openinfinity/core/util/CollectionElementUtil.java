@@ -15,6 +15,7 @@
  */
 package org.openinfinity.core.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,6 +28,22 @@ import java.util.Map;
  */
 public class CollectionElementUtil {
 
+	/**
+	 * Callbacks each type safe element of <code>java.util.Collection</code>.
+	 * 
+	 * @param collection Represents typesafe <code>java.util.Collection</code>.
+	 * @param callback Represents the <code>java.util.Collection</code> element callback interface.
+	 */
+	//TODO: FIXME
+//	public static <k,v extends Object> Collection<v> iterateAndAddValuesToCollection(Collection<k> collection, CollectionElementCallback<k> callback) {
+//		Collection<v> values = new ArrayList<v>();
+//		for (k value : collection) {
+//			if (value != null)
+//				callback.callback(value);
+//		}
+//		return values;
+//	}
+	
 	/**
 	 * Callbacks each type safe element of <code>java.util.Collection</code>.
 	 * 

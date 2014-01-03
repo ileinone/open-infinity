@@ -1,5 +1,6 @@
 package org.openinfinity.core.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
@@ -15,12 +16,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode
-public class UpdateInformation<I> {
+public class UpdateInformation<USER_ID, UPDATE_ID> implements Serializable {
+	
+	private UPDATE_ID updateInformationId;
 	
 	/**
 	 * Represent the unique id of the person or system whom made the update.
 	 */
-	private I updateById;
+	private USER_ID updateById;
 	
 	/**
 	 * Represent the actual update lifecycle event for the domain entity.

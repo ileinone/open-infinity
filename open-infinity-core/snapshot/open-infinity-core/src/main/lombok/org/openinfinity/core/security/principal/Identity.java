@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.security.core.Authentication;
@@ -34,13 +36,33 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  * Class for maintaining the state of the federated identity. Implements <code>org.springframework.security.core.Authentication</code> interface.
  * 
  * @author Ilkka Leinonen
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.4.0
  */
 @Data
 @EqualsAndHashCode
 public class Identity implements Authentication, Serializable {
 
+	/**
+	 * Represents the user's first name for the user session.
+	 */
+	private String firstName;
+
+	/**
+	 * Represents the user's last name for the user session.
+	 */
+	private String lastName;
+	
+	/**
+	 * Represents the user's phone number for the user session.
+	 */
+	private String phoneNumber; 
+
+	/**
+	 * Represents the user's email for the user session.
+	 */
+	private String email;
+	
 	/**
 	 * Represents the user principal for the user session.
 	 */
@@ -60,6 +82,12 @@ public class Identity implements Authentication, Serializable {
 	 * Represents the tenant principal.
 	 */
 	private TenantPrincipal<?> tenantPrincipal;
+	
+	/**
+	 * Represents the attributes for user.
+	 */
+	@Getter
+	private Map<String, String> userAttributes = Collections.emptyMap();
 	
 	/**
 	 * Returns all roles associated with the user.
@@ -125,6 +153,17 @@ public class Identity implements Authentication, Serializable {
 		String checksum = DigestUtils.sha512Hex(builder.toString());
 		return checksum;
 	}
+	
+	/**
+	 * Adds on user attribute into the identity object.  If the identity previously contained a mapping for
+     * the attribute key, the old value is replaced by the specified value.
+	 * 
+	 * @param attributeKey Represents the user attribute's key.
+	 * @param attributeValue Represents the user attribute's value.
+	 */
+	public void addAttribute(String attributeKey, String attributeValue) {
+		this.userAttributes.put(attributeKey, attributeValue);
+	}
 
 	/**
 	 * Returns collections of GrantedAuthorities for the user.
@@ -132,8 +171,10 @@ public class Identity implements Authentication, Serializable {
 	public Collection<GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		for (Principal principal : getAllPrincipalsForIdentity()) {
-			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(principal.getName());
-			grantedAuthorities.add(grantedAuthority);
+			if (principal != null) {
+				GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(principal.getName());
+				grantedAuthorities.add(grantedAuthority); 
+			}
 		}
 		return grantedAuthorities;
 	}
@@ -188,8 +229,6 @@ public class Identity implements Authentication, Serializable {
 	public void setAuthenticated(boolean isAuthenticated)
 			throws IllegalArgumentException {
 		this.authenticated = isAuthenticated;
-		
 	}
 	
-
 }

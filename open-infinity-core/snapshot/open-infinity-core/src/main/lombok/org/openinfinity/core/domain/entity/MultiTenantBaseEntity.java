@@ -10,16 +10,17 @@ import lombok.Getter;
  * @version 1.0.0
  * @since 1.4.0
  *
- * @param <T> Represents the type of the tenant id.
+ * @param <TENANT_ID> Represents the type of the tenant id.
+ * @param <I> Represent the type safe id for the base entity.
  * @param <I> Represent the type safe id for the base entity.
  */
 @EqualsAndHashCode (callSuper = true)
-public class MultiTenantBaseEntity<T, I> extends BaseEntity<I> {
+public class MultiTenantBaseEntity<TENANT_ID, ENTITY_ID, USER_ID> extends BaseEntity<ENTITY_ID, USER_ID> {
 
 	/**
 	 * Represents the tenant id for shared schema based SaaS applications.
 	 */
 	@Getter
-	public T tenantId;
+	public TENANT_ID tenantId;
 
 }

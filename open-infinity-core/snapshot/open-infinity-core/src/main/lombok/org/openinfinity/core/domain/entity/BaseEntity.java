@@ -1,5 +1,7 @@
 package org.openinfinity.core.domain.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,16 +19,16 @@ import lombok.EqualsAndHashCode;
  * @author Ilkka Leinonen
  * @version 1.0.0
  * @since 1.4.0
- * @param <I> Represents the type of the unique id for the entity.
+ * @param <ENTITY_ID> Represents the type of the unique id for the entity.
  */
 @Data
 @EqualsAndHashCode
-public class BaseEntity <I> {
+public class BaseEntity <ENTITY_ID, USER_ID> implements Serializable {
 	
 	/**
 	 * Represents the unique id of the entity.
 	 */
-	private I id;
+	private ENTITY_ID id;
 	
 	/**
 	 * Represents the starting point of the entity lifecycle.
@@ -36,7 +38,16 @@ public class BaseEntity <I> {
 	/**
 	 * Represents the collection of the lifecycle events for the domain entity.
 	 */
-	private Collection<UpdateInformation<I>> updateInformations;
+	private Collection<UpdateInformation<ENTITY_ID, USER_ID>> updateInformations = new ArrayList<UpdateInformation<ENTITY_ID, USER_ID>>();
+	
+	/**
+	 * Add update information 
+	 * 
+	 * @param updateInformation Represents the update information concerning the entity.
+	 */
+	public void addUpdateInformation(UpdateInformation<ENTITY_ID, USER_ID> updateInformation) {
+		updateInformations.add(updateInformation);
+	}
 	
 	/**
 	 * Represents the termination date of the domain entity's lifecycle.

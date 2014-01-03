@@ -115,7 +115,7 @@ public class MultiTenantAspect extends ArgumentGatheringJoinPointInterceptor imp
 				if (object instanceof MultiTenantBaseEntity) { 
 					if (LOGGER.isDebugEnabled())
 						LOGGER.debug("MultiTenantAspect.populateTenantIdToMultiTenantEntity arguments is istance of MultiTenantBaseEntity.");
-					MultiTenantBaseEntity<?, ?> multiTenantBaseEntity = (MultiTenantBaseEntity<?, ?>) object;
+					MultiTenantBaseEntity<?, ?, ?> multiTenantBaseEntity = (MultiTenantBaseEntity<?, ?, ?>) object;
 					Object tenantId = identity.getTenantPrincipal().getId();
 					Field tenantIdField = multiTenantBaseEntity.getClass().getField(TENANT_ID_FIELD);
 					if (!tenantIdField.isAccessible()) {

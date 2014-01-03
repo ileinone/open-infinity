@@ -34,7 +34,7 @@ import org.openinfinity.core.domain.entity.MultiTenantBaseEntity;
 @Data
 @EqualsAndHashCode (callSuper = true)
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
-public class Account extends MultiTenantBaseEntity<String, String> {  
+public class Account extends MultiTenantBaseEntity<String, String, String> {  
 
 	@NonNull @NotScript private String id;
 	@NonNull @NotScript private String name;
