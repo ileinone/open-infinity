@@ -41,22 +41,27 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Data
 @EqualsAndHashCode
 public class Identity implements Authentication, Serializable {
+	
 	/**
 	 * Represents the user's first name for the user session.
 	 */
 	private String firstName;
+	
 	/**
 	 * Represents the user's last name for the user session.
 	 */
 	private String lastName;
+	
 	/**
 	 * Represents the user's phone number for the user session.
 	 */
 	private String phoneNumber;
+	
 	/**
 	 * Represents the user's email for the user session.
 	 */
 	private String email;
+	
 	/**
 	 * Represents the user principal for the user session.
 	 */
@@ -65,18 +70,22 @@ public class Identity implements Authentication, Serializable {
 	 * Represents the state of the authentication process.
 	 */
 	private boolean authenticated;
+	
 	/**
 	 * Represents the collection of role principals.
 	 */
 	private Collection<RolePrincipal> rolePrincipals;
+	
 	/**
 	 * Represents the tenant principal.
 	 */
 	private TenantPrincipal<?> tenantPrincipal;
+	
 	/**
 	 * Represents the attributes for user.
 	 */
 	private Map<String, String> userAttributes = new HashMap<String, String>();
+	
 	/**
 	 * Returns all roles associated with the user.
 	 * 
@@ -89,6 +98,7 @@ public class Identity implements Authentication, Serializable {
 		}
 		return Collections.unmodifiableList(roles);
 	}
+	
 	/**
 	 * Returns all principals for the user.
 	 * 
@@ -101,6 +111,7 @@ public class Identity implements Authentication, Serializable {
 		principals.addAll(rolePrincipals);
 		return Collections.unmodifiableCollection(principals);
 	}
+	
 	/**
 	 * Clears the context of the identity.
 	 */
@@ -115,6 +126,7 @@ public class Identity implements Authentication, Serializable {
 		this.tenantPrincipal = null;
 		this.rolePrincipals = null;
 	}
+	
 	/**
 	 * Calculates checksum with salt information for the identity. String presentation of the SHA-512 algorithm will be returned.
 	 * 
@@ -138,6 +150,7 @@ public class Identity implements Authentication, Serializable {
 		String checksum = DigestUtils.sha512Hex(builder.toString());
 		return checksum;
 	}
+	
 	/**
 	 * Adds on user attribute into the identity object.  If the identity previously contained a mapping for
      * the attribute key, the old value is replaced by the specified value.
@@ -148,6 +161,7 @@ public class Identity implements Authentication, Serializable {
 	public void addAttribute(String attributeKey, String attributeValue) {
 		this.userAttributes.put(attributeKey, attributeValue);
 	}
+	
 	/**
 	 * Returns collections of GrantedAuthorities for the user.
 	 */
@@ -161,6 +175,7 @@ public class Identity implements Authentication, Serializable {
 		}
 		return grantedAuthorities;
 	}
+	
 	/**
 	 * Returns always "N/A, Not Available".
 	 * 
@@ -169,36 +184,42 @@ public class Identity implements Authentication, Serializable {
 	public String getPassword() {
 		return "N/A";
 	}
+	
 	/**
 	 * Returns name for the user principal.
 	 */
 	public String getName() {
 		return userPrincipal.getName();
 	}
+	
 	/**
 	 * Returns name for the user principal.
 	 */
 	public Object getCredentials() {
 		return userPrincipal.getName();
 	}
+	
 	/**
 	 * Returns the identity object itself.
 	 */
 	public Object getDetails() {
 		return this;
 	}
+	
 	/**
 	 * Returns user principal associated with the identity.
 	 */
 	public Object getPrincipal() {
 		return userPrincipal;
 	}
+	
 	/**
 	 * Returns state of the authentication process.
 	 */
 	public boolean isAuthenticated() {
 		return this.authenticated;
 	}
+	
 	/**
 	 * Setter for the state of authentication process.
 	 */
@@ -206,5 +227,4 @@ public class Identity implements Authentication, Serializable {
 		this.authenticated = isAuthenticated;
 	}
 	
-
 }
