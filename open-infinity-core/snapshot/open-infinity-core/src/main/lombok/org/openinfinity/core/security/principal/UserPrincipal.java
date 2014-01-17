@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 the original author or authors.
+ * Copyright (c) 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@ package org.openinfinity.core.security.principal;
 import java.io.Serializable;
 import java.security.Principal;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * Class for maintaining the state of the federated identity user principal.
  * 
@@ -25,6 +28,8 @@ import java.security.Principal;
  * @version 1.0.0
  * @since 1.4.0
  */
+@Data
+@EqualsAndHashCode
 public class UserPrincipal implements Principal, Serializable {
 
 	/**

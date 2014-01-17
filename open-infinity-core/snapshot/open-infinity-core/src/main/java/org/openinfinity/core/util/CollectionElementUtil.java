@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 the original author or authors.
+ * Copyright (c) 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package org.openinfinity.core.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -27,22 +26,6 @@ import java.util.Map;
  * @since 1.2.0
  */
 public class CollectionElementUtil {
-
-	/**
-	 * Callbacks each type safe element of <code>java.util.Collection</code>.
-	 * 
-	 * @param collection Represents typesafe <code>java.util.Collection</code>.
-	 * @param callback Represents the <code>java.util.Collection</code> element callback interface.
-	 */
-	//TODO: FIXME
-//	public static <k,v extends Object> Collection<v> iterateAndAddValuesToCollection(Collection<k> collection, CollectionElementCallback<k> callback) {
-//		Collection<v> values = new ArrayList<v>();
-//		for (k value : collection) {
-//			if (value != null)
-//				callback.callback(value);
-//		}
-//		return values;
-//	}
 	
 	/**
 	 * Callbacks each type safe element of <code>java.util.Collection</code>.
@@ -57,7 +40,6 @@ public class CollectionElementUtil {
 		}
 	}
 	
-
 	/**
 	 * Callbacks each type safe entry of <code>java.util.Map</code>.
 	 * 

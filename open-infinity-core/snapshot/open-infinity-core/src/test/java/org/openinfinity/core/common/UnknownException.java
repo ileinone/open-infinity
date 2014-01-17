@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 the original author or authors.
+ * Copyright (c) 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,22 +26,18 @@ public class UnknownException extends RuntimeException{
 
 	public UnknownException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UnknownException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	public UnknownException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	public UnknownException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

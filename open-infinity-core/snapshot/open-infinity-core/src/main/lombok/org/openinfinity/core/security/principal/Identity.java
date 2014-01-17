@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2013 the original author or authors.
+ * Copyright (c) 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,17 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 /**
  * Class for maintaining the state of the federated identity. Implements <code>org.springframework.security.core.Authentication</code> interface.
  * 
@@ -42,53 +41,42 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Data
 @EqualsAndHashCode
 public class Identity implements Authentication, Serializable {
-
 	/**
 	 * Represents the user's first name for the user session.
 	 */
 	private String firstName;
-
 	/**
 	 * Represents the user's last name for the user session.
 	 */
 	private String lastName;
-	
 	/**
 	 * Represents the user's phone number for the user session.
 	 */
-	private String phoneNumber; 
-
+	private String phoneNumber;
 	/**
 	 * Represents the user's email for the user session.
 	 */
 	private String email;
-	
 	/**
 	 * Represents the user principal for the user session.
 	 */
 	private UserPrincipal userPrincipal;
-	
 	/**
 	 * Represents the state of the authentication process.
 	 */
 	private boolean authenticated;
-	
 	/**
 	 * Represents the collection of role principals.
 	 */
 	private Collection<RolePrincipal> rolePrincipals;
-	
 	/**
 	 * Represents the tenant principal.
 	 */
 	private TenantPrincipal<?> tenantPrincipal;
-	
 	/**
 	 * Represents the attributes for user.
 	 */
-	@Getter
-	private Map<String, String> userAttributes = Collections.emptyMap();
-	
+	private Map<String, String> userAttributes = new HashMap<String, String>();
 	/**
 	 * Returns all roles associated with the user.
 	 * 
@@ -101,7 +89,6 @@ public class Identity implements Authentication, Serializable {
 		}
 		return Collections.unmodifiableList(roles);
 	}
-	
 	/**
 	 * Returns all principals for the user.
 	 * 
@@ -114,7 +101,6 @@ public class Identity implements Authentication, Serializable {
 		principals.addAll(rolePrincipals);
 		return Collections.unmodifiableCollection(principals);
 	}
- 	
 	/**
 	 * Clears the context of the identity.
 	 */
@@ -129,7 +115,6 @@ public class Identity implements Authentication, Serializable {
 		this.tenantPrincipal = null;
 		this.rolePrincipals = null;
 	}
-	
 	/**
 	 * Calculates checksum with salt information for the identity. String presentation of the SHA-512 algorithm will be returned.
 	 * 
@@ -148,12 +133,11 @@ public class Identity implements Authentication, Serializable {
 		for (RolePrincipal rolePrincipal : rolePrincipals) {
 			if (rolePrincipal != null && rolePrincipal.getName() != null && rolePrincipal.getName().length() > 0) {
 				builder.append(rolePrincipal.getName());
-			}	
+			}
 		}
 		String checksum = DigestUtils.sha512Hex(builder.toString());
 		return checksum;
 	}
-	
 	/**
 	 * Adds on user attribute into the identity object.  If the identity previously contained a mapping for
      * the attribute key, the old value is replaced by the specified value.
@@ -164,7 +148,6 @@ public class Identity implements Authentication, Serializable {
 	public void addAttribute(String attributeKey, String attributeValue) {
 		this.userAttributes.put(attributeKey, attributeValue);
 	}
-
 	/**
 	 * Returns collections of GrantedAuthorities for the user.
 	 */
@@ -173,12 +156,11 @@ public class Identity implements Authentication, Serializable {
 		for (Principal principal : getAllPrincipalsForIdentity()) {
 			if (principal != null) {
 				GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(principal.getName());
-				grantedAuthorities.add(grantedAuthority); 
+				grantedAuthorities.add(grantedAuthority);
 			}
 		}
 		return grantedAuthorities;
 	}
-
 	/**
 	 * Returns always "N/A, Not Available".
 	 * 
@@ -187,48 +169,42 @@ public class Identity implements Authentication, Serializable {
 	public String getPassword() {
 		return "N/A";
 	}
-
 	/**
 	 * Returns name for the user principal.
 	 */
 	public String getName() {
 		return userPrincipal.getName();
 	}
-
 	/**
 	 * Returns name for the user principal.
 	 */
 	public Object getCredentials() {
 		return userPrincipal.getName();
 	}
-
 	/**
 	 * Returns the identity object itself.
 	 */
 	public Object getDetails() {
 		return this;
 	}
-
 	/**
 	 * Returns user principal associated with the identity.
 	 */
 	public Object getPrincipal() {
 		return userPrincipal;
 	}
-
 	/**
 	 * Returns state of the authentication process.
 	 */
 	public boolean isAuthenticated() {
 		return this.authenticated;
 	}
-
 	/**
 	 * Setter for the state of authentication process.
 	 */
-	public void setAuthenticated(boolean isAuthenticated)
-			throws IllegalArgumentException {
+	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
 		this.authenticated = isAuthenticated;
 	}
 	
+
 }
