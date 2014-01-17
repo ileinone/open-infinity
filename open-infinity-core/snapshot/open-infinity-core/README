@@ -1,5 +1,9 @@
 Open Infinity Core - a solution accelerator framework.
 
+v.1.5.0.RELEASE - New features with the following content
+
++ Identity object contains now user principles
+
 v.1.4.0.RELEASE - New features with the following content
 
 + BaseEntity support with lifecycle information support for standardized data models.

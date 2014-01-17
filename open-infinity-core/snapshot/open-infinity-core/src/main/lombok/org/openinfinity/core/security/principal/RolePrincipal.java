@@ -59,6 +59,5 @@ public class RolePrincipal implements Principal, Serializable {
 	public String toString() {
 		return "RolePrincipal [name=" + name + "]";
 	}
-	
 
 }
