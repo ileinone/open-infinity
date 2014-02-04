@@ -88,7 +88,7 @@ public class LogAspect extends ArgumentGatheringJoinPointInterceptor {
 
 	/**
 	 * Logs the method information based on the <code>org.openinfinity.core.annotation.Logging</code> annotation.
-	 * Log level will be based on the value setted (debug=1, info=2, warn=3, error=4, trace=5) in the 
+	 * Log level will be based on the value set (debug=1, info=2, warn=3, error=4, trace=5) in the 
 	 * configuration file or by the annotation <code>org.openinfinity.core.annotation.Log.LogLevel</code>.
 	 * Highest level will be the actual log level.
 	 * 
